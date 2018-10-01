@@ -71,9 +71,9 @@ def vecPlot(fig, ax, rjph, piph, r, q_vec, label, pars, vmin=None, vmax=None,
         C = ax.pcolormesh(x, y, aq[None,:],
                 cmap=cmap, vmin=vmin, vmax=vmax, norm=norm)
 
-        s = 4
+        s = 4   #TODO: make this an input parameter
         if i%s == 0:
-            phi = 0.5*( phif[0:-1] + phif[1:] )           #Avg phifs
+            phi = 0.5*( phif[0:-1] + phif[1:] )        #Avg phifs
             x = R * np.cos(phi)
             y = R * np.sin(phi)
             Vx =  aq_r*np.cos(phi) - aq_p*np.sin(phi)  #Basis rotation to get cartesian
@@ -81,15 +81,10 @@ def vecPlot(fig, ax, rjph, piph, r, q_vec, label, pars, vmin=None, vmax=None,
             Q = ax.quiver( x[::s], y[::s], Vx[::s], Vy[::s],
                             scale=scale, units='xy', width=0.01 )
 
-
         if lim_float and rf.max() > rmax:
             rmax = rf.max()
 
-
-#------------ Put Arrows on top of pcolormesh --------------------
-#    x = r*np.cos()
-#    y = r*np.sin()
-#    Q = ax.quiver( x, y, Vx, Vy
+    #Put reference arrow on top of plots
     key = 3.0
     qk = ax.quiverkey( Q, 0.03, 1.015, key, coordinates='axes',
                         labelpos='N', label=label + r"$\,=\, {0:g}$".format(key))
